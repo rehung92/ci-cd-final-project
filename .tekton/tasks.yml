@@ -3,7 +3,7 @@ kind: Task
 metadata:
   name: cleanup
 spec:
-  description: This task will clean up a workspace by delecting all of the files.
+  description: This task will clean up a workspace by deleting all of the files.
   workspaces:
     - name: source
   steps:
@@ -33,19 +33,19 @@ spec:
           rm -rf "${WORKSPACE_SOURCE_PATH}"/..?*
         fi
 
----       
+---      
 apiVersion: tekton.dev/v1beta1
 kind: Task
-metatdata:
+metadata:
   name: nose
 spec: 
-  workspaces: 
-    - name: source
   params:
     - name: args
       description: Argments to pass to nose
       type: string
       default: "-v"
+  workspaces: 
+    - name: source
   steps:
     - name: nosetests
       image: python:3.9-slim
